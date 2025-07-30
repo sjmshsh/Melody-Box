@@ -1,0 +1,38 @@
+[
+  {
+    "song_name": "二十二",
+    "singer": "陶喆",
+    "album": "黑色柳丁",
+    "year": "2002",
+    "label": "华语, 流行",
+    "dura": 43,
+    "img": "/clips/json_data/img/黑色柳丁.png"
+  },
+  {
+    "song_name": "离别开出花",
+    "singer": "就是南方凯",
+    "album": "离别开出花",
+    "year": "2023",
+    "label": "华语, 流行",
+    "dura": 39,
+    "img": "/clips/json_data/img/离别开出花.png"
+  },
+  {
+    "song_name": "晴天",
+    "singer": "周杰伦",
+    "album": "叶惠美",
+    "year": "2003",
+    "label": "华语, 流行",
+    "dura": 28,
+    "img": "/clips/json_data/img/叶惠美.png"
+  },
+  {
+    "song_name": "Super Star",
+    "singer": "S.H.E",
+    "album": "Super Star",
+    "year": "2003",
+    "label": "华语, 流行",
+    "dura": 24,
+    "img": "/clips/json_data/img/SuperStar.png"
+  }
+]
