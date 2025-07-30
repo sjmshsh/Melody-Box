@@ -1,4 +1,4 @@
-import { supabase, DatabaseRoom, DatabasePlayer } from './supabase';
+import { supabase } from './supabase';
 import { Song } from '@/types';
 import { getRandomSong } from '@/data/mockSongs';
 

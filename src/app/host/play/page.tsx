@@ -314,7 +314,7 @@ export default function HostPlayPage() {
               {/* 提示信息 */}
               <div className="mt-6 p-4 bg-amber-50 rounded-xl">
                 <p className="text-sm text-amber-700">
-                  💡 听到熟悉的旋律了吗？点击"揭晓答案"查看正确答案
+                  💡 听到熟悉的旋律了吗？点击&ldquo;揭晓答案&rdquo;查看正确答案
                 </p>
               </div>
             </motion.div>

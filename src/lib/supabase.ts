@@ -33,6 +33,6 @@ export interface DatabaseGameEvent {
   id: string;
   room_id: string;
   event_type: 'song_start' | 'song_end' | 'answer_reveal' | 'round_end' | 'game_end';
-  event_data: Record<string, any>;
+  event_data: Record<string, unknown>;
   created_at: string;
 }

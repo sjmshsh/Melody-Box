@@ -1,11 +1,11 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, Volume2, Zap, RotateCcw, Crown, Users, Trophy, Copy, Check } from 'lucide-react';
+import { ArrowLeft, Volume2, Zap, Crown, Users, Trophy, Copy, Check } from 'lucide-react';
 import { Song } from '@/types';
 import { getAudioClip } from '@/data/audioConfig';
-import { gameService, GameRoom, Player } from '@/lib/gameService';
+import { gameService, GameRoom } from '@/lib/gameService';
 
 interface OnlineGameRoomProps {
   roomCode: string;
@@ -25,6 +25,22 @@ export default function OnlineGameRoom({ roomCode, onExit }: OnlineGameRoomProps
   const [answer, setAnswer] = useState('');
   const [submittedAnswer, setSubmittedAnswer] = useState(false);
   const [myPlayerId, setMyPlayerId] = useState('');
+
+  const loadRoomData = useCallback(async () => {
+    setLoading(true);
+    try {
+      const room = await gameService.getRoomInfo(roomCode);
+      if (room) {
+        setGameRoom(room);
+      } else {
+        setError('房间不存在或已过期');
+      }
+    } catch {
+      setError('加载房间数据失败');
+    } finally {
+      setLoading(false);
+    }
+  }, [roomCode]);
 
   // 初始化房间数据和实时订阅
   useEffect(() => {
@@ -88,7 +104,7 @@ export default function OnlineGameRoom({ roomCode, onExit }: OnlineGameRoomProps
       window.removeEventListener('beforeunload', handleBeforeUnload);
       gameService.leaveRoom();
     };
-  }, [roomCode]);
+  }, [roomCode, loadRoomData]);
 
   // 音频可视化效果
   useEffect(() => {
@@ -104,7 +120,7 @@ export default function OnlineGameRoom({ roomCode, onExit }: OnlineGameRoomProps
     }, 120);
 
     return () => clearInterval(interval);
-  }, [isPlaying, gameRoom?.gameState]);
+  }, [isPlaying, gameRoom]);
 
   // 音频事件监听
   useEffect(() => {
@@ -126,21 +142,7 @@ export default function OnlineGameRoom({ roomCode, onExit }: OnlineGameRoomProps
     };
   }, []);
 
-  const loadRoomData = async () => {
-    setLoading(true);
-    try {
-      const room = await gameService.getRoomInfo(roomCode);
-      if (room) {
-        setGameRoom(room);
-      } else {
-        setError('房间不存在或已过期');
-      }
-    } catch (err) {
-      setError('加载房间数据失败');
-    } finally {
-      setLoading(false);
-    }
-  };
+
 
   const copyRoomCode = async () => {
     try {
@@ -168,7 +170,7 @@ export default function OnlineGameRoom({ roomCode, onExit }: OnlineGameRoomProps
       } else {
         setError(result.error || '开始游戏失败');
       }
-    } catch (err) {
+    } catch {
       setError('开始游戏时发生错误');
     }
   };
@@ -198,7 +200,7 @@ export default function OnlineGameRoom({ roomCode, onExit }: OnlineGameRoomProps
       } else {
         setError(result.error || '揭晓答案失败');
       }
-    } catch (err) {
+    } catch {
       setError('揭晓答案时发生错误');
     }
   };
@@ -217,7 +219,7 @@ export default function OnlineGameRoom({ roomCode, onExit }: OnlineGameRoomProps
       } else {
         setError(result.error || '进入下一轮失败');
       }
-    } catch (err) {
+    } catch {
       setError('进入下一轮时发生错误');
     }
   };
@@ -287,8 +289,8 @@ export default function OnlineGameRoom({ roomCode, onExit }: OnlineGameRoomProps
           console.log('答案正确！');
         }
       }
-    } catch (err) {
-      console.error('提交答案失败:', err);
+    } catch (error) {
+      console.error('提交答案失败:', error);
     }
   };
 
@@ -441,7 +443,7 @@ export default function OnlineGameRoom({ roomCode, onExit }: OnlineGameRoomProps
                     准备开始第 {gameRoom.currentRound} 轮游戏
                   </h2>
                   <p className="text-gray-600 mb-8">
-                    房主可以点击"开始新一轮"按钮开始游戏
+                    房主可以点击&ldquo;开始新一轮&rdquo;按钮开始游戏
                   </p>
                   
                   {/* 游戏规则 */}

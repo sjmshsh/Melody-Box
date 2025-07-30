@@ -30,11 +30,7 @@ export default function GachaModePage() {
   const [audioLevels, setAudioLevels] = useState<number[]>(new Array(12).fill(0));
   const [gachaRotation, setGachaRotation] = useState(0);
   
-  // 房间系统数据 (mock)
-  const [roomStats] = useState({
-    activeRooms: Math.floor(Math.random() * 8) + 2, // 2-9个房间
-    maxRooms: 10
-  });
+  // 房间系统数据 (mock) - removed unused variable
 
   // 音频可视化效果
   useEffect(() => {

@@ -78,7 +78,7 @@ export default function RoomSelectModal({
       } else {
         setError(result.error || '创建房间失败');
       }
-    } catch (err) {
+    } catch {
       setError('创建房间时发生错误');
     } finally {
       setIsCreating(false);
@@ -107,7 +107,7 @@ export default function RoomSelectModal({
       } else {
         setError(result.error || '加入房间失败');
       }
-    } catch (err) {
+    } catch {
       setError('加入房间时发生错误');
     } finally {
       setIsJoining(false);
