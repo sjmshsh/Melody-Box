@@ -203,9 +203,138 @@ export const mockPlaylists: Playlist[] = [
   }
 ];
 
-// 获取随机歌曲（用于扭蛋模式）- 优先使用真实音频歌曲
+// 洗牌池管理类 - 确保公平的随机抽取
+class ShufflePool {
+  private static readonly STORAGE_KEY = 'gacha-shuffle-pool';
+  private static readonly USED_SONGS_KEY = 'gacha-used-songs';
+
+  // 获取可用歌曲列表
+  private static getAvailableSongs(): Song[] {
+    return realAudioSongs.length > 0 ? realAudioSongs : mockSongs;
+  }
+
+  // 洗牌算法 (Fisher-Yates)
+  private static shuffleArray<T>(array: T[]): T[] {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  }
+
+  // 从 localStorage 获取洗牌池
+  private static getPoolFromStorage(): Song[] {
+    try {
+      const stored = localStorage.getItem(this.STORAGE_KEY);
+      return stored ? JSON.parse(stored) : [];
+    } catch {
+      return [];
+    }
+  }
+
+  // 保存洗牌池到 localStorage
+  private static savePoolToStorage(pool: Song[]): void {
+    try {
+      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(pool));
+    } catch {
+      // 忽略存储错误
+    }
+  }
+
+  // 获取已使用的歌曲列表
+  private static getUsedSongs(): string[] {
+    try {
+      const stored = localStorage.getItem(this.USED_SONGS_KEY);
+      return stored ? JSON.parse(stored) : [];
+    } catch {
+      return [];
+    }
+  }
+
+  // 保存已使用的歌曲列表
+  private static saveUsedSongs(usedSongs: string[]): void {
+    try {
+      localStorage.setItem(this.USED_SONGS_KEY, JSON.stringify(usedSongs));
+    } catch {
+      // 忽略存储错误
+    }
+  }
+
+  // 重置洗牌池
+  private static resetPool(): Song[] {
+    const availableSongs = this.getAvailableSongs();
+    const shuffledPool = this.shuffleArray(availableSongs);
+    this.savePoolToStorage(shuffledPool);
+    this.saveUsedSongs([]);
+    return shuffledPool;
+  }
+
+  // 获取下一首歌曲
+  public static getNextSong(): Song {
+    let pool = this.getPoolFromStorage();
+    const availableSongs = this.getAvailableSongs();
+
+    // 如果池子为空或者歌曲库发生变化，重新洗牌
+    if (pool.length === 0 || pool.length > availableSongs.length) {
+      pool = this.resetPool();
+    }
+
+    // 从池子中取出一首歌
+    const song = pool.pop()!;
+    this.savePoolToStorage(pool);
+
+    // 记录已使用的歌曲
+    const usedSongs = this.getUsedSongs();
+    usedSongs.push(song.id);
+    this.saveUsedSongs(usedSongs);
+
+    return song;
+  }
+
+  // 获取统计信息（用于调试）
+  public static getStats(): {
+    poolSize: number;
+    usedCount: number;
+    totalSongs: number;
+    usedSongs: string[];
+  } {
+    const pool = this.getPoolFromStorage();
+    const usedSongs = this.getUsedSongs();
+    const availableSongs = this.getAvailableSongs();
+
+    return {
+      poolSize: pool.length,
+      usedCount: usedSongs.length,
+      totalSongs: availableSongs.length,
+      usedSongs
+    };
+  }
+
+  // 手动重置（用于测试或重新开始）
+  public static reset(): void {
+    this.resetPool();
+  }
+}
+
+// 获取随机歌曲（用于扭蛋模式）- 使用公平的洗牌池机制
 export const getRandomSong = (): Song => {
-    // 总是优先使用真实音频歌曲（demo 数据）
+  return ShufflePool.getNextSong();
+};
+
+// 获取扭蛋统计信息（可选，用于调试）
+export const getGachaStats = () => {
+  return ShufflePool.getStats();
+};
+
+// 重置扭蛋池（可选，用于重新开始）
+export const resetGachaPool = () => {
+  ShufflePool.reset();
+};
+
+// 获取随机歌曲（用于联机模式）- 使用简单随机，不影响扭蛋池
+export const getRandomSongForOnline = (): Song => {
+  // 总是优先使用真实音频歌曲（demo 数据）
   if (realAudioSongs.length > 0) {
     const randomIndex = Math.floor(Math.random() * realAudioSongs.length);
     return realAudioSongs[randomIndex];

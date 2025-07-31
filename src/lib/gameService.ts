@@ -1,6 +1,6 @@
 import { supabase } from './supabase';
 import { Song } from '@/types';
-import { getRandomSong } from '@/data/mockSongs';
+import { getRandomSongForOnline } from '@/data/mockSongs';
 
 export interface Player {
   id: string;
@@ -220,7 +220,7 @@ class GameService {
         return { success: false, error: '房间不存在' };
       }
 
-      const song = getRandomSong();
+      const song = getRandomSongForOnline();
       
       const { error: updateError } = await supabase
         .from('rooms')
