@@ -491,10 +491,6 @@ export default function OnlineGameRoom({ roomCode, onExit }: OnlineGameRoomProps
                     transition={{ duration: 0.6 }}
                   >
                     <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-4 mb-4">
-                      <div className="flex items-center justify-center gap-2 mb-2">
-                        <span className="text-2xl">🎭</span>
-                        <span className="text-sm font-medium text-purple-600 uppercase tracking-wide">神秘线索</span>
-                      </div>
                       <h2 className="text-xl font-semibold text-gray-800 leading-relaxed">
                         {currentPrompt || '准备开始猜歌...'}
                       </h2>

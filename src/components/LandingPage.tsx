@@ -151,7 +151,7 @@ export default function LandingPage() {
                   <Zap size={28} className="text-white" />
                 </motion.div>
                 <div className="text-left">
-                  <h3 className="text-xl font-semibold mb-1">扭蛋模式</h3>
+                  <h3 className="text-xl font-semibold mb-1">随机模式</h3>
                   <p className="text-sm text-white/90">随机惊喜，轻松同乐</p>
                 </div>
               </div>
