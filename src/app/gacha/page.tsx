@@ -248,7 +248,7 @@ export default function GachaModePage() {
             </button>
             <div className="flex items-center gap-2">
               <Zap className="text-pink-500" size={24} />
-              <h1 className="text-xl font-semibold">扭蛋模式</h1>
+              <h1 className="text-xl font-semibold">随机模式</h1>
             </div>
           </div>
         </div>

@@ -208,9 +208,13 @@ class ShufflePool {
   private static readonly STORAGE_KEY = 'gacha-shuffle-pool';
   private static readonly USED_SONGS_KEY = 'gacha-used-songs';
 
-  // 获取可用歌曲列表
+  // 获取可用歌曲列表 - 排除指定歌曲
   private static getAvailableSongs(): Song[] {
-    return realAudioSongs.length > 0 ? realAudioSongs : mockSongs;
+    const excludedSongIds = ['li-bie-kai-chu-hua', 'ye-qu', 'pu-tong-peng-you'];
+    const allSongs = realAudioSongs.length > 0 ? realAudioSongs : mockSongs;
+
+    // 过滤掉排除的歌曲
+    return allSongs.filter(song => !excludedSongIds.includes(song.id));
   }
 
   // 洗牌算法 (Fisher-Yates)
@@ -332,16 +336,21 @@ export const resetGachaPool = () => {
   ShufflePool.reset();
 };
 
-// 获取随机歌曲（用于联机模式）- 使用简单随机，不影响扭蛋池
+// 获取随机歌曲（用于联机模式）- 使用简单随机，不影响扭蛋池，排除指定歌曲
 export const getRandomSongForOnline = (): Song => {
+  const excludedSongIds = ['li-bie-kai-chu-hua', 'ye-qu', 'pu-tong-peng-you'];
+
   // 总是优先使用真实音频歌曲（demo 数据）
   if (realAudioSongs.length > 0) {
-    const randomIndex = Math.floor(Math.random() * realAudioSongs.length);
-    return realAudioSongs[randomIndex];
+    const availableSongs = realAudioSongs.filter(song => !excludedSongIds.includes(song.id));
+    const randomIndex = Math.floor(Math.random() * availableSongs.length);
+    return availableSongs[randomIndex];
   }
+
   // 若无真实歌曲，则退回 mock
-  const randomIndex = Math.floor(Math.random() * mockSongs.length);
-  return mockSongs[randomIndex];
+  const availableMockSongs = mockSongs.filter(song => !excludedSongIds.includes(song.id));
+  const randomIndex = Math.floor(Math.random() * availableMockSongs.length);
+  return availableMockSongs[randomIndex];
 };
 
 // 根据ID获取歌曲 - 同时搜索真实音频和mock歌曲

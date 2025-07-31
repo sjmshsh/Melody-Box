@@ -66,7 +66,7 @@ export default function ModeSelectModal({ isOpen, onClose, onSelectMode }: ModeS
                     <User className="text-blue-600" size={24} />
                   </div>
                   <div className="text-left">
-                    <h3 className="text-lg font-semibold text-gray-800 mb-1">随机模式</h3>
+                    <h3 className="text-lg font-semibold text-gray-800 mb-1">扭蛋模式</h3>
                     <p className="text-sm text-gray-600">独自享受音乐猜歌的乐趣</p>
                   </div>
                 </div>
