@@ -31,12 +31,11 @@ class GameService {
     return this.currentPlayerId;
   }
 
-  // 生成房间号
+  // 生成房间号 - 4位数字
   generateRoomCode(): string {
-    const prefixes = ['MUSIC', 'SONG', 'TUNE', 'BEAT'];
-    const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
-    const suffix = Math.random().toString(36).substring(2, 8).toUpperCase();
-    return `${prefix}${suffix}`;
+    // 生成1000-9999之间的4位数字
+    const roomCode = Math.floor(Math.random() * 9000) + 1000;
+    return roomCode.toString();
   }
 
   // 创建房间
@@ -484,11 +483,11 @@ class GameService {
 
       return {
         activeRooms: rooms?.length || 0,
-        maxRooms: 20 // 设置最大房间数
+        maxRooms: 5 // 设置最大房间数
       };
     } catch (error) {
       console.error('Get room stats error:', error);
-      return { activeRooms: 0, maxRooms: 20 };
+      return { activeRooms: 0, maxRooms: 5 };
     }
   }
 }

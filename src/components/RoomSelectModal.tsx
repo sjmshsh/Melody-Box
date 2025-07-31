@@ -27,7 +27,7 @@ export default function RoomSelectModal({
   const [createdRoomCode, setCreatedRoomCode] = useState('');
   const [copied, setCopied] = useState(false);
   const [error, setError] = useState('');
-  const [roomStats, setRoomStats] = useState({ activeRooms: 0, maxRooms: 20 });
+  const [roomStats, setRoomStats] = useState({ activeRooms: 0, maxRooms: 5 });
   const [playerName, setPlayerName] = useState('');
 
   const canCreateRoom = roomStats.activeRooms < roomStats.maxRooms;
@@ -340,7 +340,7 @@ export default function RoomSelectModal({
                       value={playerName}
                       onChange={(e) => setPlayerName(e.target.value)}
                       placeholder="例如：小明"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="w-full ppm x-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
                       maxLength={20}
                     />
                   </div>
@@ -352,10 +352,10 @@ export default function RoomSelectModal({
                     <input
                       type="text"
                       value={roomCode}
-                      onChange={(e) => setRoomCode(e.target.value.toUpperCase())}
-                      placeholder="MUSICXXXXXX"
+                      onChange={(e) => setRoomCode(e.target.value.replace(/\D/g, ''))}
+                      placeholder="1234"
                       className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono text-center text-lg"
-                      maxLength={12}
+                      maxLength={4}
                     />
                   </div>
 

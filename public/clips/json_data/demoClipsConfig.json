@@ -1,5 +1,32 @@
 [
   {
+    "song_name": "离别开出花",
+    "singer": "就是南方凯",
+    "album": "离别开出花",
+    "year": "2023",
+    "label": "华语, 流行",
+    "dura": 39,
+    "img": "/clips/json_data/img/离别开出花.png"
+  },
+  {
+    "song_name": "夜曲",
+    "singer": "周杰伦",
+    "album": "11月的肖邦",
+    "year": "2005",
+    "label": "流行",
+    "dura": 45,
+    "img": "/clips/json_data/img/夜曲.png"
+  },
+  {
+    "song_name": "普通朋友",
+    "singer": "陶喆",
+    "album": "I'm OK",
+    "year": "1999",
+    "label": "流行, R&B",
+    "dura": 19,
+    "img": "/clips/json_data/img/普通朋友.jpg"
+  },
+  {
     "song_name": "二十二",
     "singer": "陶喆",
     "album": "黑色柳丁",
@@ -9,13 +36,22 @@
     "img": "/clips/json_data/img/黑色柳丁.png"
   },
   {
-    "song_name": "离别开出花",
-    "singer": "就是南方凯",
-    "album": "离别开出花",
-    "year": "2023",
-    "label": "华语, 流行",
+    "song_name": "跳楼机",
+    "singer": "LBI利比（时柏尘）",
+    "album": "跳楼机",
+    "year": "2024",
+    "label": "流行",
     "dura": 39,
-    "img": "/clips/json_data/img/离别开出花.png"
+    "img": "/clips/json_data/img/跳楼机.jpg"
+  },
+  {
+    "song_name": "Yellow",
+    "singer": "Coldplay",
+    "album": "Yellow",
+    "year": "2000",
+    "label": "民谣",
+    "dura": 34,
+    "img": "/clips/json_data/img/YELLOW.png"
   },
   {
     "song_name": "晴天",
@@ -27,15 +63,6 @@
     "img": "/clips/json_data/img/叶惠美.png"
   },
   {
-    "song_name": "Super Star",
-    "singer": "S.H.E",
-    "album": "Super Star",
-    "year": "2003",
-    "label": "华语, 流行",
-    "dura": 24,
-    "img": "/clips/json_data/img/SuperStar.png"
-  },
-  {
     "song_name": "一路生花",
     "singer": "温奕心",
     "album": "一路生花",
@@ -45,13 +72,13 @@
     "img": "/clips/json_data/img/一路生花.png"
   },
   {
-    "song_name": "Yellow",
-    "singer": "Coldplay",
-    "album": "Yellow",
-    "year": "2000",
-    "label": "民谣",
-    "dura": 53,
-    "img": "/clips/json_data/img/YELLOW.png"
+    "song_name": "Super Star",
+    "singer": "S.H.E",
+    "album": "Super Star",
+    "year": "2003",
+    "label": "华语, 流行",
+    "dura": 24,
+    "img": "/clips/json_data/img/SuperStar.png"
   },
   {
     "song_name": "Shape of You",
@@ -70,15 +97,6 @@
     "label": "民谣",
     "dura": 36,
     "img": "/clips/json_data/img/LoveStory.png"
-  },
-  {
-    "song_name": "夜曲",
-    "singer": "周杰伦",
-    "album": "11月的肖邦",
-    "year": "2005",
-    "label": "流行",
-    "dura": 45,
-    "img": "/clips/json_data/img/夜曲.png"
   },
   {
     "song_name": "珠玉",

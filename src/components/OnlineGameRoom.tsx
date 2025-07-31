@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, Volume2, Zap, Crown, Users, Trophy, Copy, Check } from 'lucide-react';
+import Image from 'next/image';
 import { Song } from '@/types';
 import { getAudioClip } from '@/data/audioConfig';
 import { gameService, GameRoom } from '@/lib/gameService';
@@ -595,13 +596,20 @@ export default function OnlineGameRoom({ roomCode, onExit }: OnlineGameRoomProps
                 >
                   <div className="text-green-600 text-lg font-medium mb-4">🎉 答案揭晓</div>
                   
+                  {/* 专辑封面 */}
                   <motion.div
-                    className="w-48 h-48 mx-auto mb-6 rounded-2xl overflow-hidden bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center shadow-xl"
+                    className="w-48 h-48 mx-auto mb-6 rounded-2xl overflow-hidden shadow-xl relative"
                     initial={{ scale: 0, rotate: -180 }}
                     animate={{ scale: 1, rotate: 0 }}
                     transition={{ duration: 0.8, ease: 'easeOut' }}
                   >
-                    <span className="text-6xl">🎵</span>
+                    <Image
+                      src={currentSong.coverUrl}
+                      alt={currentSong.title}
+                      fill
+                      sizes="192px"
+                      className="object-cover"
+                    />
                   </motion.div>
 
                   <motion.div
