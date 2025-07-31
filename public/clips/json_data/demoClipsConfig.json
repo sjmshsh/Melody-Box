@@ -34,5 +34,68 @@
     "label": "华语, 流行",
     "dura": 24,
     "img": "/clips/json_data/img/SuperStar.png"
+  },
+  {
+    "song_name": "一路生花",
+    "singer": "温奕心",
+    "album": "一路生花",
+    "year": "2021",
+    "label": "流行",
+    "dura": 42,
+    "img": "/clips/json_data/img/一路生花.png"
+  },
+  {
+    "song_name": "Yellow",
+    "singer": "Coldplay",
+    "album": "Yellow",
+    "year": "2000",
+    "label": "民谣",
+    "dura": 53,
+    "img": "/clips/json_data/img/YELLOW.png"
+  },
+  {
+    "song_name": "Shape of You",
+    "singer": "Ed Sheeran",
+    "album": "Shape of You",
+    "year": "2017",
+    "label": "流行",
+    "dura": 39,
+    "img": "/clips/json_data/img/ShapeOfYou.png"
+  },
+  {
+    "song_name": "Love Story",
+    "singer": "Taylor Swift",
+    "album": "Love Story",
+    "year": "2009",
+    "label": "民谣",
+    "dura": 36,
+    "img": "/clips/json_data/img/LoveStory.png"
+  },
+  {
+    "song_name": "夜曲",
+    "singer": "周杰伦",
+    "album": "11月的肖邦",
+    "year": "2005",
+    "label": "流行",
+    "dura": 45,
+    "img": "/clips/json_data/img/夜曲.png"
+  },
+  {
+    "song_name": "珠玉",
+    "singer": "单依纯",
+    "album": "珠玉",
+    "year": "2025",
+    "label": "流行",
+    "dura": 43,
+    "img": "/clips/json_data/img/珠玉.png"
+  },
+  {
+    "song_name": "Deadman",
+    "singer": "蔡徐坤",
+    "album": "Deadman",
+    "year": "2025",
+    "label": "放克, 灵歌, R&B",
+    "dura": 52,
+    "img": "/clips/json_data/img/Deadman.png"
   }
 ]
