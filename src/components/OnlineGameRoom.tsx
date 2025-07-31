@@ -25,6 +25,18 @@ export default function OnlineGameRoom({ roomCode, onExit }: OnlineGameRoomProps
   const [answer, setAnswer] = useState('');
   const [submittedAnswer, setSubmittedAnswer] = useState(false);
   const [myPlayerId, setMyPlayerId] = useState('');
+  const [currentPrompt, setCurrentPrompt] = useState('');
+
+  // 随机选择文案
+  const getRandomPrompt = useCallback(() => {
+    const gamePrompts = [
+      '有一个人经常在晚上听这首歌，他是谁',
+      '有三个人都喜欢听这位歌手的歌，猜猜是哪三个人',
+      '爱听这首歌的人，他的MBTI 是 INFP'
+    ];
+    const randomIndex = Math.floor(Math.random() * gamePrompts.length);
+    return gamePrompts[randomIndex];
+  }, []);
 
   const loadRoomData = useCallback(async () => {
     setLoading(true);
@@ -63,6 +75,8 @@ export default function OnlineGameRoom({ roomCode, onExit }: OnlineGameRoomProps
         setCurrentSong(room.currentSong);
         setAnswer('');
         setSubmittedAnswer(false);
+        // 设置随机文案
+        setCurrentPrompt(getRandomPrompt());
         
         // 延迟一点时间确保audio元素准备好，然后自动播放
         setTimeout(() => {
@@ -104,7 +118,7 @@ export default function OnlineGameRoom({ roomCode, onExit }: OnlineGameRoomProps
       window.removeEventListener('beforeunload', handleBeforeUnload);
       gameService.leaveRoom();
     };
-  }, [roomCode, loadRoomData]);
+  }, [roomCode, loadRoomData, getRandomPrompt]);
 
   // 音频可视化效果
   useEffect(() => {
@@ -167,6 +181,8 @@ export default function OnlineGameRoom({ roomCode, onExit }: OnlineGameRoomProps
         setCurrentSong(result.song);
         setAnswer('');
         setSubmittedAnswer(false);
+        // 设置随机文案
+        setCurrentPrompt(getRandomPrompt());
       } else {
         setError(result.error || '开始游戏失败');
       }
@@ -466,7 +482,26 @@ export default function OnlineGameRoom({ roomCode, onExit }: OnlineGameRoomProps
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.9 }}
                 >
-                  <h2 className="text-2xl font-semibold text-gray-800 mb-6">猜猜这是什么歌？</h2>
+                  {/* 随机文案显示 */}
+                  <motion.div
+                    className="mb-6"
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                  >
+                    <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-4 mb-4">
+                      <div className="flex items-center justify-center gap-2 mb-2">
+                        <span className="text-2xl">🎭</span>
+                        <span className="text-sm font-medium text-purple-600 uppercase tracking-wide">神秘线索</span>
+                      </div>
+                      <h2 className="text-xl font-semibold text-gray-800 leading-relaxed">
+                        {currentPrompt || '准备开始猜歌...'}
+                      </h2>
+                    </div>
+                    {/*<p className="text-sm text-gray-500">*/}
+                    {/*  🎵 听音乐，找线索，猜出答案吧！*/}
+                    {/*</p>*/}
+                  </motion.div>
                   
                   <motion.div
                     className="w-48 h-48 mx-auto mb-8 rounded-2xl bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center shadow-xl"

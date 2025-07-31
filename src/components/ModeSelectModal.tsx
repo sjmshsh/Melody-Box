@@ -46,7 +46,7 @@ export default function ModeSelectModal({ isOpen, onClose, onSelectMode }: ModeS
                 <span className="text-2xl">🎲</span>
               </motion.div>
               <h2 className="text-2xl font-bold text-gray-800 mb-2">选择游戏模式</h2>
-              <p className="text-gray-600">选择您想要的扭蛋体验</p>
+              <p className="text-gray-600">选择您想要的猜歌体验</p>
             </div>
 
             {/* 模式选项 */}
@@ -66,7 +66,7 @@ export default function ModeSelectModal({ isOpen, onClose, onSelectMode }: ModeS
                     <User className="text-blue-600" size={24} />
                   </div>
                   <div className="text-left">
-                    <h3 className="text-lg font-semibold text-gray-800 mb-1">单机模式</h3>
+                    <h3 className="text-lg font-semibold text-gray-800 mb-1">扭蛋模式</h3>
                     <p className="text-sm text-gray-600">独自享受音乐猜歌的乐趣</p>
                   </div>
                 </div>
