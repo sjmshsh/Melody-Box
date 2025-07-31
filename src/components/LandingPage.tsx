@@ -189,7 +189,7 @@ export default function LandingPage() {
         >
           <div>Made with ❤️ for music lovers everywhere</div>
           <div className="flex items-center justify-center gap-2 text-xs">
-            <span>xxx音乐练习生X计划</span>
+            <span>TME音乐练习生X计划</span>
             <span>&</span>
             <span>封培5班2组</span>
           </div>
