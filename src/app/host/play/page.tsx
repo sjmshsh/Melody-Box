@@ -104,16 +104,20 @@ export default function HostPlayPage() {
   const revealAnswer = () => {
     setShowAnswer(true);
     setIsPlaying(false);
-    
+    // 立即清空进度条
+    setProgress(0);
+
     // 切换到原曲片段
     setTimeout(() => {
       const audio = audioRef.current;
       if (audio && currentSong) {
         const audioClip = getAudioClip(currentSong.id);
         const revealAudioSrc = audioClip?.revealClip || currentSong.clipUrl;
-        
+
         if (revealAudioSrc) {
           audio.src = revealAudioSrc;
+          // 重置音频播放位置
+          audio.currentTime = 0;
           audio.play().catch((error) => {
             console.log('Reveal audio playback failed:', error);
           });
@@ -126,10 +130,19 @@ export default function HostPlayPage() {
   // 下一首
   const nextSong = () => {
     if (currentIndex < gameQueue.length - 1) {
+      // 停止当前音频播放
+      const audio = audioRef.current;
+      if (audio) {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+
+      // 重置所有状态
       setCurrentIndex(currentIndex + 1);
       setShowAnswer(false);
       setIsPlaying(false);
       setProgress(0);
+      setAudioLevels(new Array(20).fill(0));
     } else {
       // 游戏结束，回到首页
       router.push('/');
